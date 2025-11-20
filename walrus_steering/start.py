@@ -39,12 +39,12 @@ def main():
                 # [0.1, "neg", "interpol", "euler_multi_quadrants_openBC", "euler_multi_quadrants_openBC_gamma_1.404_H2_100_Dry_air_-15"],
                 # [0.1, "pos", "interpol", "euler_multi_quadrants_openBC", "euler_multi_quadrants_openBC_gamma_1.33_H2O_20"],
                 # [0.1, "neg", "interpol", "euler_multi_quadrants_openBC", "euler_multi_quadrants_openBC_gamma_1.33_H2O_20"],
-                [0.3, "neg", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1(double-v)"],
-                [0.3, "pos", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1(double-v)"],
-                [0.5, "neg", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1(double-v)"],
-                [0.5, "pos", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1(double-v)"],
-                [0.7, "neg", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1(double-v)"],
-                [0.7, "pos", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1(double-v)"],
+                [0.3, "neg", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1"],
+                [0.3, "pos", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1"],
+                [0.5, "neg", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1"],
+                [0.5, "pos", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1"],
+                [0.7, "neg", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1"],
+                [0.7, "pos", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1"],
                 # [0.3, "pos", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1"],
                 # [0.4, "pos", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1"],
                 # [0.6, "pos", "drop", "shear_flow", "shear_flow_Reynolds_5e4_Schmidt_5e-1"],
@@ -64,7 +64,7 @@ def main():
         injection_strength = i
         inject_sign = isign  #     <<--------### ['pos' | 'neg' ] 
         inject_type = itype #      <<--------### ['none' | 'pad' | 'interpol' | 'drop']  
-        experiment_name = fname+f"[{inject_sign}-{inject_type}@{injection_strength}][time][FullRes-NoRenorm][euler_single:(dt_stride=2)-(dt_stride=1)]" 
+        experiment_name = fname+f"[{inject_sign}-{inject_type}@{injection_strength}][vortex][FullRes-NoRenorm]" 
         run_name = f"interpretability[{fname}]"
 
         experiment_folder = "experiments/"
