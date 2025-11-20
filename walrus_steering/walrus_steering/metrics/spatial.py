@@ -1,0 +1,215 @@
+import torch
+from the_well.benchmark.metrics.common import Metric
+from the_well.data.datasets import WellMetadata
+
+
+class MSE(Metric):
+    @staticmethod
+    def eval(
+        x: torch.Tensor,
+        y: torch.Tensor,
+        meta: WellMetadata,
+    ) -> torch.Tensor:
+        """
+        Mean Squared Error
+
+        Parameters
+        ----------
+        x : torch.Tensor | np.ndarray
+            Input tensor.
+        y : torch.Tensor | np.ndarray
+            Target tensor.
+        meta : WellMetadata
+            Metadata for the dataset.
+
+        Returns
+        -------
+        torch.Tensor
+            Mean squared error between x and y.
+        """
+        n_spatial_dims = tuple(range(-meta.n_spatial_dims - 1, -1))
+        return torch.mean((x - y) ** 2, dim=n_spatial_dims)
+
+
+class NMSE(Metric):
+    @staticmethod
+    def eval(
+        x: torch.Tensor,
+        y: torch.Tensor,
+        meta: WellMetadata,
+        eps: float = 1e-7,
+        norm_mode: str = "norm",
+    ) -> torch.Tensor:
+        """
+        Normalized Mean Squared Error
+
+        Parameters
+        ----------
+        x : torch.Tensor | np.ndarray
+            Input tensor.
+        y : torch.Tensor | np.ndarray
+            Target tensor.
+        meta : WellMetadata
+            Metadata for the dataset.
+        eps : float
+            Small value to avoid division by zero. Default is 1e-7.
+        norm_mode : str
+            Mode for computing the normalization factor. Can be 'norm' or 'std'. Default is 'norm'.
+
+        Returns
+        -------
+        torch.Tensor
+            Normalized mean squared error between x and y.
+        """
+        n_spatial_dims = tuple(range(-meta.n_spatial_dims - 1, -1))
+        if norm_mode == "norm":
+            norm = torch.mean(y**2, dim=n_spatial_dims)
+        elif norm_mode == "std":
+            norm = torch.std(y, dim=n_spatial_dims) ** 2
+        else:
+            raise ValueError(f"Invalid norm_mode: {norm_mode}")
+        return MSE.eval(x, y, meta) / (norm + eps)
+
+
+class RMSE(Metric):
+    @staticmethod
+    def eval(
+        x: torch.Tensor,
+        y: torch.Tensor,
+        meta: WellMetadata,
+    ) -> torch.Tensor:
+        """
+        Root Mean Squared Error
+
+        Parameters
+        ----------
+        x : torch.Tensor | np.ndarray
+            Input tensor.
+        y : torch.Tensor | np.ndarray
+            Target tensor.
+        meta : WellMetadata
+            Metadata for the dataset.
+
+        Returns
+        -------
+        torch.Tensor
+            Root mean squared error between x and y.
+        """
+        return torch.sqrt(MSE.eval(x, y, meta))
+
+
+class NRMSE(Metric):
+    @staticmethod
+    def eval(
+        x: torch.Tensor,
+        y: torch.Tensor,
+        meta: WellMetadata,
+        eps: float = 1e-7,
+        norm_mode: str = "norm",
+    ) -> torch.Tensor:
+        """
+        Normalized Root Mean Squared Error
+
+        Parameters
+        ----------
+        x : torch.Tensor | np.ndarray
+            Input tensor.
+        y : torch.Tensor | np.ndarray
+            Target tensor.
+        meta : WellMetadata
+            Metadata for the dataset.
+        eps : float
+            Small value to avoid division by zero. Default is 1e-7.
+        norm_mode : str
+            Mode for computing the normalization factor. Can be 'norm' or 'std'. Default is 'norm'.
+
+        Returns
+        -------
+        torch.Tensor
+            Normalized root mean squared error between x and y.
+        """
+        return torch.sqrt(NMSE.eval(x, y, meta, eps=eps, norm_mode=norm_mode))
+
+
+class VMSE(Metric):
+    @staticmethod
+    def eval(
+        x: torch.Tensor,
+        y: torch.Tensor,
+        meta: WellMetadata,
+    ) -> torch.Tensor:
+        """
+        Variance Scaled Mean Squared Error
+
+        Parameters
+        ----------
+        x : torch.Tensor | np.ndarray
+            Input tensor.
+        y : torch.Tensor | np.ndarray
+            Target tensor.
+        meta : WellMetadata
+            Metadata for the dataset.
+
+        Returns
+        -------
+        torch.Tensor
+            Variance mean squared error between x and y.
+        """
+        return NMSE.eval(x, y, meta, norm_mode="std")
+
+
+class VRMSE(Metric):
+    @staticmethod
+    def eval(
+        x: torch.Tensor,
+        y: torch.Tensor,
+        meta: WellMetadata,
+    ) -> torch.Tensor:
+        """
+        Root Variance Scaled Mean Squared Error
+
+        Parameters
+        ----------
+        x : torch.Tensor | np.ndarray
+            Input tensor.
+        y : torch.Tensor | np.ndarray
+            Target tensor.
+        meta : WellMetadata
+            Metadata for the dataset.
+
+        Returns
+        -------
+        torch.Tensor
+            Root variance mean squared error between x and y.
+        """
+        return NRMSE.eval(x, y, meta, norm_mode="std")
+
+
+class LInfinity(Metric):
+    @staticmethod
+    def eval(
+        x: torch.Tensor,
+        y: torch.Tensor,
+        meta: WellMetadata,
+    ) -> torch.Tensor:
+        """
+        L-Infinity Norm
+
+        Parameters
+        ----------
+        x : torch.Tensor | np.ndarray
+            Input tensor.
+        y : torch.Tensor | np.ndarray
+            Target tensor.
+        meta : WellMetadata
+            Metadata for the dataset.
+
+        Returns
+        -------
+        torch.Tensor
+            L-Infinity norm between x and y.
+        """
+        spatial_dims = tuple(range(-meta.n_spatial_dims - 1, -1))
+        return torch.max(
+            torch.abs(x - y).flatten(start_dim=spatial_dims[0], end_dim=-2), dim=-2
+        ).values

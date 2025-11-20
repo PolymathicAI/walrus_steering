@@ -1,0 +1,3 @@
+_partial_: true
+_target_: walrus_public.models.shared_utils.mlps.MLP
+exp_factor: 4.0

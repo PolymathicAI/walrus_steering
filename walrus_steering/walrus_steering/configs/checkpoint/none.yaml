@@ -1,0 +1,2 @@
+_target_: walrus_public.trainer.checkpoints.CheckPointLoader
+save_dir: checkpoints/${name}

@@ -1,0 +1,20 @@
+_target_: walrus_public.optim.distributed_shampoo.distributed_shampoo.DistributedShampoo
+lr: 1E-2
+betas: [0.9, 0.999]
+epsilon: 1E-12
+weight_decay: 1E-4
+max_preconditioner_dim: 8192
+precondition_frequency: 100
+start_preconditioning_step: 100
+use_decoupled_weight_decay: True
+grafting_config:
+  _target_: walrus_public.optim.distributed_shampoo.shampoo_types.AdamGraftingConfig
+  beta2: 0.999
+  epsilon: 1E-8
+distributed_config:
+  _target_: walrus_public.optim.distributed_shampoo.shampoo_types.DDPShampooConfig
+  communication_dtype:
+    _target_: walrus_public.optim.distributed_shampoo.shampoo_types.CommunicationDType
+    _args_: [3]
+  num_trainers_per_group: 1
+  communicate_params: False

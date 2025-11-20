@@ -1,0 +1,18 @@
+defaults:
+  - _self_
+  - trainer: defaults
+  - optimizer: adam
+  - lr_scheduler: inv_sqrt_w_linear_ramps
+  - model: isotropic_model
+  - data: all_2d
+  - experiment: no_overrides
+  - server: ???
+  - distribution: local
+  - logger: wandb
+  - checkpoint: defaults
+data_workers: 14
+name: default_name
+automatic_setup: True
+short_validation_only: True
+layers_to_hook: [] # List of model layers to hook for activation saving, e.g. ['blocks.0', 'blocks.1']
+save_activations: null # Filename for saving activations

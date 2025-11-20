@@ -1,0 +1,4 @@
+_partial_: true
+_target_: walrus_public.models.encoders.hmlp_encoder.hMLP_encoder
+patch_size: 16 # Assume this is for all dimensions unless a tuple is passed
+groups: 12

@@ -1,0 +1,13 @@
+defaults:
+  - isotropic_model
+  - _self_
+hidden_dim: 8
+processor_blocks: 1
+groups: 2
+processor:
+  space_mixing:
+    _partial_: true
+    _target_: walrus_public.models.spatial_blocks.full_attention.FullAttention
+    num_heads: 2
+  time_mixing:
+    num_heads: 2

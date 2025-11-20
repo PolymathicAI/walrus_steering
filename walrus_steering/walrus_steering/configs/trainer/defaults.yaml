@@ -1,0 +1,23 @@
+_target_: walrus_public.trainer.Trainer
+max_epoch: 220
+val_frequency: 2
+rollout_val_frequency: 5
+short_validation_length: 40
+max_rollout_steps: 60
+num_time_intervals: 5
+enable_amp: False
+loss_fn: 
+  _target_: the_well.benchmark.metrics.MAE
+formatter:
+  _target_: hydra.utils.get_class
+  path: walrus_public.data.well_to_multi_transformer.ChannelsFirstWithTimeFormatter
+prediction_type: delta
+grad_acc_steps: 4
+image_validation: True
+video_validation: True
+gradient_log_level: 0 # 0 is none, 1 is full norm only, higher not implemented
+clip_gradient: 10
+log_interval: 200 # How often to log training metrics to screen (causes GPU sync)
+loss_multiplier: 100. # Multiply the loss by this factor so gradient scaling is easier
+lr_scheduler_per_step: False
+save_raw_predictions: False

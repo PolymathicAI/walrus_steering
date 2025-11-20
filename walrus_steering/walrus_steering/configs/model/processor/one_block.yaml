@@ -1,0 +1,2 @@
+_target_: models.spatiotemporal_blocks.space_time_split.SpaceTimeSplitBlock # Does not exist atm
+partial_inner_block: 

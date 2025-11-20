@@ -1,0 +1,90 @@
+defaults:
+  - field_index_map_override: no_override
+well_base_path: /mnt/gpuxl/polymathic/the_well/datasets/ # Usually overrided by server
+wandb_data_name: "well_allmain_only"
+module_parameters:
+  _target_: walrus_public.data.MixedWellDataModule
+  batch_size: 2
+  n_steps_input: 6
+  n_steps_output: 1
+  min_dt_stride: 1
+  max_dt_stride: 5
+  max_samples: 2000 # Time in fake epochs
+  well_dataset_info: 
+    active_matter:
+      include_filters: []
+      exclude_filters: []
+    planetswe:
+      include_filters: []
+      exclude_filters: []
+    acoustic_scattering_maze:
+      include_filters: []
+      exclude_filters: []
+    acoustic_scattering_inclusions:
+      include_filters: []
+      exclude_filters: ["chunk_11"] # Chunk 11 has a bad trajectory.
+    acoustic_scattering_discontinuous:
+      include_filters: []
+      exclude_filters: []
+    euler_multi_quadrants_openBC:
+      include_filters: []
+      exclude_filters: []
+    euler_multi_quadrants_periodicBC:
+      include_filters: []
+      exclude_filters: []
+    gray_scott_reaction_diffusion:
+      include_filters: []
+      exclude_filters: []
+    rayleigh_benard:
+      include_filters: []
+      exclude_filters: []
+    shear_flow:
+      include_filters: []
+      exclude_filters: []
+    turbulent_radiative_layer_2D:
+      include_filters: []
+      exclude_filters: []
+    helmholtz_staircase:
+      include_filters: []
+      exclude_filters: []
+    viscoelastic_instability:
+      include_filters: []
+      exclude_filters: []
+    supernova_explosion_128:
+      include_filters: []
+      exclude_filters: []
+      step_downsample_factor: .5
+      batch_downsample_factor: .5
+      field_transforms:
+        density: torch.log10 
+        temperature: torch.log10
+    turbulence_gravity_cooling:
+      include_filters: []
+      exclude_filters: []
+      step_downsample_factor: .5
+      batch_downsample_factor: .5
+      field_transforms:
+        density: torch.log10 
+        temperature: torch.log10
+    turbulent_radiative_layer_3D:
+      include_filters: []
+      exclude_filters: []
+      step_downsample_factor: .5
+      batch_downsample_factor: .5
+      field_transforms:
+        density: torch.log10 
+        temperature: torch.log10
+    MHD_64:
+      include_filters: []
+      exclude_filters: []
+      step_downsample_factor: .5
+      batch_downsample_factor: .5
+    rayleigh_taylor_instability:
+      include_filters: []
+      exclude_filters: []
+      step_downsample_factor: .5
+      batch_downsample_factor: .5
+    flowbench_FPO_NS_2D_512x128_harmonics:
+      include_filters: []
+      exclude_filters: []
+      path: /mnt/gpuxl/polymathic/WellFormattedExternalData/flowbench/flowbench_FPO_NS_2D_512x128_harmonics    

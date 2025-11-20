@@ -1,0 +1,8 @@
+defaults:
+  - defaults
+  - _self_
+
+max_epoch: 1
+val_frequency: 1
+image_validation: False
+video_validation: False

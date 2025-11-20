@@ -1,0 +1,15 @@
+defaults:
+  - field_index_map_override: override
+well_base_path: /mnt/gpuxl/polymathic/the_well/datasets/ # Usually overrided by server
+wandb_data_name: "well_2d_only"
+module_parameters:
+  _target_: walrus_public.data.MixedWellDataModule
+  batch_size: 2
+  n_steps_input: 6
+  n_steps_output: 1
+  min_dt_stride: 1
+  max_dt_stride: 5
+  max_samples: 2000 # Time in fake epochs
+  validation_mode: ${validation_mode}
+  well_dataset_info:
+  

@@ -1,0 +1,6 @@
+defaults:
+  - space_mixing: full_spatial_attention
+  - time_mixing: axial_time_attention
+  - channel_mixing: identity
+_partial_: true
+_target_: walrus_public.models.spatiotemporal_blocks.space_time_split.SpaceTimeSplitBlock

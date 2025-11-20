@@ -1,0 +1,4 @@
+_target_: walrus_public.trainer.checkpoints.CheckPointer
+save_dir: checkpoints/${name}
+save_best: True
+checkpoint_frequency: 20

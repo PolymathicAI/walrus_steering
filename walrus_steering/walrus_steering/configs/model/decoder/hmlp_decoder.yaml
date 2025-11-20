@@ -1,0 +1,3 @@
+_partial_: true
+_target_: walrus_public.models.decoders.hmlp_decoder.hMLP_decoder
+patch_size: 16 # Assume this is for all dimensions unless a tuple is passed
