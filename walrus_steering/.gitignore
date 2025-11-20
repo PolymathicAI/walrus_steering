@@ -13,7 +13,9 @@ Thumbs.db
 venv/
 fucked/
 experiments/archive/
-experiments/
+experiments/checkpointing
+experiments/logs
+experiments/visuals
 experiments(early_checkpoint+old_norm)/
 experiments(late_checkpoint+old_norm)/
 the_well_internal/
