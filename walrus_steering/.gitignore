@@ -2,7 +2,7 @@
 build/
 dist/
 *.egg-info/
-*.favorites.json
+.favorites.json
 
 # Ignore system and IDE files
 .DS_Store
