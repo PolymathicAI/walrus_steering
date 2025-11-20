@@ -96,34 +96,12 @@ def main():
                                     "trainer.rollout_val_frequency=1",
                                     "trainer.short_validation_length=2",
                                     "trainer.save_raw_predictions=False",                # <<--------###
-                                #   f"trainer.save_activations='{fname}[FullRes][dt_stride=2,v_factor=2]'", # <<--------###
+                                #   f"trainer.save_activations='{fname}[FullRes]'", # <<--------###
                                     "layers_to_hook=['blocks.39']",#])
                                    f"+inject_spatial_interpolation={inject_type}",
                                    f"+inject_sign={inject_sign}",
                                    f"+inject_strength={injection_strength}",
-                                   f"+inject_tensor_path='experiments/activations/euler_single:(dt_stride=2)-(dt_stride=1).pickle'"]) #newTensor:(18vortex_group)-(10laminar_group).pickle
-                                                                            # (v1) new_norm_avg:(vortex_group)-(laminar_group) 
-                                                                            # (v2) FullRes:(6vortex_group)-(5laminar_group)
-                                                                            # (v2) FullRes:(4vortex_group)-(5laminar_group)
-                                                                            # (v2) FullRes-Retry:(Reynolds_1e5_Schmidt_1e0)-(Reynolds_1e4_Schmidt_1e0)
-                                                                            # (v2) FullRes-Retry:(Reynolds_1e5_Schmidt_1e0)-(Reynolds_1e4_Schmidt_1e0)[d:3,4,5]
-                                                                            # (v2) FullRes:(vortex:2xReynolds_5e5)-(laminar:2xReynolds_5e5)[d:3,4,5]
-                                                                            # (v3) newTensor:(7vortex_group)-(6laminar_group)[d:3,4,5]
-                                                                            # (v3) newTensor:(7vortex_group)-(6laminar_group)[d:0,1,3,4,5]
-                                                                            # (v3) newTensor:(7vortex_group)-(6laminar_group)[d:2,3,4,5] <<---
-                                                                            # (v3) newTensor:(18vortex_group)-(10laminar_group) <<---
-                                                                            # (v3) shear_flow_single:(dt_stride=10)-(dt_stride=1)
-                                                                            # (v3) shear_flow_all:(dt_stride=10)-(dt_stride=1)
-                                                                            # (v3) shear_flow_vort:(dt_stride=10)-(dt_stride=1)
-                                                                            # (v3) shear_flow_laminar:(dt_stride=10)-(dt_stride=1)
-                                                                            # (v3) euler_single:(dt_stride=2)-(dt_stride=1) 
-                                                                            # (v3) shear_single:(dt_stride=2)-(dt_stride=1)
-                                                                            # (v3) shear_flow_all:(dt_stride=2)-(dt_stride=1)
-                                                                            # (v3) shear_single:[dt_stride=2,v_factor=2]-[dt_stride=1,v_factor=1]
-                                                                            # (v3) shear_single:[dt_stride=2,v_factor=2,n_steps=12]-[dt_stride=1,v_factor=1,n_steps=12]       <- (not tried)
-                                                                            # (v3) shear_flow_laminar:[dt_stride=2,v_factor=2]-[dt_stride=1,v_factor=1]
-
-
+                                   f"+inject_tensor_path='experiments/activations/newTensor:(18vortex_group)-(10laminar_group).pickle'"]) 
 
 
         # --- Distribution --- #
